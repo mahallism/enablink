@@ -125,16 +125,30 @@ class Pendampingan_model extends Aplego_Model {
                 AND app_student_active.semester_id = '$semester_id'
                 AND app_student_active.approver_id IS NOT NULL")
             ->join("app_majors", "app_majors.majors_id = app_students.majors_id");
-        //condition
-        if (!empty($data['majors_id'])) {
-            $this->db->where('app_majors.majors_id', $data['majors_id']);
+
+        $strict_matching = $this->config->item('strict_volunteer_matching');
+        if ($strict_matching) {
+            if (!empty($data['majors_id'])) {
+                $this->db->where('app_majors.majors_id', $data['majors_id']);
+            }
+            if (!empty($data['faculty_id'])) {
+                $this->db->where('app_majors.faculty_id', $data['faculty_id']);
+            }
+            if (!empty($data['majors_focus'])) {
+                $this->db->where('app_majors.majors_focus', $data['majors_focus']);
+            }
+        } else {
+            if (empty($data['prior_majors_id']) && !empty($data['majors_id'])) {
+                $data['prior_majors_id'] = $data['majors_id'];
+            }
+            if (empty($data['prior_faculty_id']) && !empty($data['faculty_id'])) {
+                $data['prior_faculty_id'] = $data['faculty_id'];
+            }
+            if (empty($data['prior_majors_focus']) && !empty($data['majors_focus'])) {
+                $data['prior_majors_focus'] = $data['majors_focus'];
+            }
         }
-        if (!empty($data['faculty_id'])) {
-            $this->db->where('app_majors.faculty_id', $data['faculty_id']);
-        }
-        if (!empty($data['majors_focus'])) {
-            $this->db->where('app_majors.majors_focus', $data['majors_focus']);
-        }
+
         if(!empty($data['limit_count_accompaniment'])){
             $this->db->having("count_accompaniment < '".$data['limit_count_accompaniment']."'");
         }

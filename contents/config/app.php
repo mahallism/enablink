@@ -52,3 +52,6 @@ $config['status'] = array(
 	'Selesai',
 	'Dibatalkan',
 );
+
+// Matching volunteer: false = prioritaskan prodi/fakultas sama, tetap tampilkan yang lain (cocok Kampus Dieng)
+$config['strict_volunteer_matching'] = getenv('STRICT_VOLUNTEER_MATCHING') === 'true';

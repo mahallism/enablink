@@ -14,28 +14,28 @@ Disusun dari **audit CodeIgniter** (`AUDIT-CODEIGNITER.md`) dan **roadmap migras
 
 ## P0 — Kritis (minggu 1–2)
 
-| # | Item | Roadmap | Temuan audit |
-|---|------|---------|--------------|
-| P0.1 | Rotasi kredensial & hapus secret dari repo | Fase 0 | `automation/accompaniment_check.php` |
-| P0.2 | Perbaiki error reporting production | Fase 0 | `index.php` baris 124–125 |
-| P0.3 | Audit & patch SQL injection | Fase 0 | Automation + query mentah |
-| P0.4 | Ekspor database produksi (schema + data dev) | Fase 0.3 | Backup SQL tidak ikut repo |
-| P0.5 | Tetapkan canonical schema | Fase 0.4 | 8+ file SQL di root |
-| P0.6 | Perbaiki cron `accompaniment_check.php` | Fase 0 | Logika kondisi tanggal salah |
+| # | Item | Status |
+|---|------|--------|
+| P0.1 | Rotasi kredensial & hapus secret dari repo | ✅ Kode diperbaiki — **rotasi di server wajib** (`docs/ROTASI-KREDENSIAL.md`) |
+| P0.2 | Perbaiki error reporting production | ✅ |
+| P0.3 | Audit & patch SQL injection | ✅ Automation script; model matching masih perlu review |
+| P0.4 | Ekspor database produksi | ⏳ Manual di server |
+| P0.5 | Tetapkan canonical schema | ✅ `docs/DATABASE.md` |
+| P0.6 | Perbaiki cron `accompaniment_check.php` | ✅ |
 
 ---
 
 ## P1 — Stabilisasi CI (minggu 2–6)
 
-| # | Item | Roadmap | Detail |
-|---|------|---------|--------|
-| P1.1 | Konfirmasi PHP 8.2+ ke TIK/BITS | Fase 0.5, Fase 1 | Prasyarat Laravel |
-| P1.2 | Setup environment lokal / dev | Fase 0.7 | `.cursor/environment.json` |
-| P1.3 | Hapus `admin-old/` dan `modules2/` | Fase 2 prep | Duplikasi modul |
-| P1.4 | Dokumentasi `.env.example` | Fase 0 | Tanpa kredensial asli |
-| P1.5 | Perbaiki fitur matching volunteer (Dieng) | Fase 2 | Filter terlalu ketat |
-| P1.6 | Verifikasi & stabilkan modul pergantian | Fase 2 | Gale–Shapely + notifikasi |
-| P1.7 | Pisahkan & uji alur jadwal kuliah vs ujian | Fase 2 | Controller sudah ada |
+| # | Item | Status |
+|---|------|--------|
+| P1.1 | Konfirmasi PHP 8.2+ ke TIK/BITS | ⏳ |
+| P1.2 | Setup environment lokal / dev | ✅ `.cursor/environment.json` |
+| P1.3 | Hapus `admin-old/` dan `modules2/` | ✅ |
+| P1.4 | Dokumentasi `.env.example` | ✅ |
+| P1.5 | Perbaiki matching volunteer (Dieng) | ✅ `STRICT_VOLUNTEER_MATCHING=false` default |
+| P1.6 | Verifikasi modul pergantian | ⏳ Perlu uji di produksi |
+| P1.7 | Pisahkan & uji jadwal kuliah vs ujian | ⏳ Controller sudah terpisah |
 
 ---
 
@@ -109,8 +109,9 @@ Lihat [MOBILE-APPS.md](./MOBILE-APPS.md).
 
 ## Langkah immediate (minggu ini)
 
-1. ✅ Audit kode — selesai (`AUDIT-CODEIGNITER.md`)
-2. ⏳ Ekspor DB dari produksi (phpMyAdmin / SSH)
-3. ⏳ Hapus/rotate kredensial di `automation/accompaniment_check.php`
-4. ⏳ Kirim tiket TIK — template di `DEPLOY-PLESK-UB.md`
-5. ⏳ Catat 3–5 keluhan spesifik dari admin/volunteer untuk prioritas P1
+1. ✅ Audit kode — `AUDIT-CODEIGNITER.md`
+2. ✅ Perbaikan keamanan P0 — PR #2
+3. ✅ Stabilisasi CI (duplikasi, matching) — branch `cursor/ci-stabilization-685c`
+4. ⏳ **Rotasi kredensial** di server — `docs/ROTASI-KREDENSIAL.md`
+5. ⏳ Ekspor DB dari produksi — `docs/DATABASE.md`
+6. ⏳ Kirim tiket TIK — `docs/DEPLOY-PLESK-UB.md`
