@@ -66,10 +66,9 @@ Audit terhadap backup kode di repo `mahallism/enablink` (branch `main`), April 2
 | `setting` | Pengaturan global & app |
 | `payout` | Pembayaran volunteer (dinonaktifkan di menu) |
 
-### Duplikasi legacy (hapus)
+### Duplikasi legacy
 
-- `contents/modules/admin-old/` — salinan penuh modul admin
-- `contents/modules/modules2/` — salinan parsial
+~~`admin-old/`~~ dan ~~`modules2/`~~ dihapus (P1.3, branch `cursor/ci-stabilization-685c`).
 
 ### Role pengguna
 
