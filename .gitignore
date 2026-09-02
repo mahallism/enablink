@@ -1,0 +1,6 @@
+backup/*
+backup_wp/*
+vendor/*
+uploads/*
+
+composer.lock

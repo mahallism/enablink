@@ -1,0 +1,16 @@
+<phpunit bootstrap="index.php"
+         colors="true"
+         verbose="true">
+  <testsuites>
+    <testsuite name="Application Test Suite">
+      <directory>./application/tests</directory>
+    </testsuite>
+  </testsuites>
+
+  <coverage processUncoveredFiles="true">
+    <include>
+      <directory suffix=".php">./application/controllers</directory>
+      <directory suffix=".php">./application/models</directory>
+    </include>
+  </coverage>
+</phpunit>

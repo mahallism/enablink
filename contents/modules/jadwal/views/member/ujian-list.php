@@ -1,0 +1,115 @@
+<?php
+$str_pendampingan = ($is_difabel === true ? 'pendampingan' : 'mendampingi');
+?>
+<style>
+    .dtrg-level-0 td{
+        padding-left: 2em!important;
+    }
+    .dtrg-level-1 td{
+        padding-left: 4em!important;;
+    }
+</style>
+<div class="content max-<?php echo $size; ?>-container">
+    <div class="content-header">
+        <h2 class="content-title text-center"><?php echo ucwords($module_name); ?></h2>
+        <?php echo $message; ?>
+    </div>
+    <div class="content-body">
+        <div class="row">
+            <div class="col-sm-9">
+                <div class="card">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h4 class="card-title">Data <?php echo ucwords($module_name); ?></h4>
+                        <div>
+                            <?php if (!empty($data_active) && !empty($data_active['approver_id'])): ?>
+                                <a href="<?php echo $action_url['input']['url']; ?>" class="btn btn-sm btn-primary"><i class="fa fa-fw fa-plus-circle"></i> Add New</a>
+                            <?php endif ?>
+                        </div>
+                    </div>
+                    <table class="table table-sm table-striped table-hover mb-0" datatables="">
+                        <thead>
+                        <tr>
+                            <th width="5" class="text-nowrap">
+                                No
+                            </th>
+                            <?php foreach ($list_field as $key => $item): ?>
+                                <th class="text-nowrap"><?php echo $item; ?></th>
+                            <?php endforeach ?>
+                            <?php if ((!empty($data_active) && !empty($data_active['approver_id'])) && (isset($action_url['edit']) || isset($action_url['delete']))): ?>
+                                <th class="text-nowrap" width="1">Aksi</th>
+                            <?php endif ?>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <?php foreach ($data as $no => $item):
+                            $id = isset($item['schedule_student_id']) ? $item['schedule_student_id'] : $item['schedule_volunteer_id']; ?>
+                            <tr>
+                                <td class="text-nowrap">
+                                    <?php //echo ($no + 1) ?>
+                                </td>
+                                <?php foreach ($list_field as $key => $value): ?>
+                                    <td><?php echo $item[$key]; ?></td>
+                                <?php endforeach ?>
+                                <?php if ((!empty($data_active) && !empty($data_active['approver_id'])) && (isset($action_url['duplicate']) || isset($action_url['edit']) || isset($action_url['delete']))): ?>
+                                    <td class="text-center text-nowrap">
+                                        <?php if (isset($action_url['detail'])): ?>
+                                            <a href="<?php echo $action_url['detail']['url'] . '/' . (isset($action_url['detail']['id'])? $item[$action_url['detail']['id']]: $id); ?>"><i class="far fa-eye"></i></a>
+                                        <?php endif ?>
+                                        <?php if (isset($action_url['duplicate'])): ?> &nbsp;
+                                            <a href="<?php echo $action_url['duplicate']['url'] . '/' . (isset($action_url['duplicate']['id'])? $item[$action_url['duplicate']['id']]: $id); ?>" class="text-muted"><i class="far fa-copy"></i></a>
+                                        <?php endif ?>
+                                        <?php if (isset($action_url['edit'])): ?> &nbsp;
+                                            <a href="<?php echo $action_url['edit']['url'] . '/' . (isset($action_url['edit']['id'])? $item[$action_url['edit']['id']]: $id); ?>"><i class="fa fa-pencil-alt"></i></a>
+                                        <?php endif ?>
+                                        <?php if (isset($action_url['delete']['url'])): ?>
+                                            <?php if (($id !== $can_delete_first) && protected_item($user_group[$action_url['delete']['protection']])): ?> &nbsp;
+                                                <a href="<?php echo $action_url['delete']['url'] . '/' . (isset($action_url['delete']['id'])? $item[$action_url['delete']['id']]: $id); ?>" onclick="return confirm('Apakah anda yakin akan menghapus data?')" class="text-danger"><i class="fa fa-trash"></i></a>
+                                            <?php endif; ?>
+                                        <?php endif ?>
+                                    </td>
+                                <?php endif ?>
+                            </tr>
+                        <?php endforeach ?>
+                        </tbody>
+                    </table>
+                    <script type="text/javascript">
+                        $(function() {
+                            var table = $('[datatables]').DataTable({
+                                order: [[1, 'asc'], [2, 'asc']],
+                                columnDefs: [ {
+                                    targets: [ 1 ],
+                                    visible: false
+                                } ],
+                                rowGroup: {
+                                    dataSrc: 1
+                                }
+                            });
+                            table.on('order.dt search.dt', function () {
+                                var i = 1;
+                                table.cells(null, 0, { search: 'applied', order: 'applied' }).every(function (cell) {
+                                    this.data(i++);
+                                });
+                            }).draw();
+                        });
+                    </script>
+                </div>
+                <!-- /.card -->
+            </div>
+            <div class="col-sm-3">
+                <div class="card mb-3">
+                    <div class="card-header">
+                        <h4 class="card-title">Jadwal Tertentu</h4>
+                    </div>
+                    <div class="card-body py-3">
+                        <?php if(!empty($semester['uts_start_at'])) { ?>
+                            <li>UTS: <?php echo date("d M y", strtotime($semester['uts_start_at'])) . " - " . date("d M y", strtotime($semester['uts_end_at'])); ?></li>
+                        <?php } ?>
+                        <?php if(!empty($semester['uas_start_at'])) { ?>
+                            <li>UAS: <?php echo date("d M y", strtotime($semester['uas_start_at'])) . " - " . date("d M y", strtotime($semester['uas_end_at'])); ?></li>
+                        <?php } ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
