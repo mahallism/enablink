@@ -35,7 +35,8 @@ laravel/npm-debug.log
 laravel/yarn-error.log
 
 # ── CodeIgniter sensitive ──
-application/config/database.php.example
+# database.php aman (tanpa fallback password) — tetap di-track
+contents/config/database.php
 
 # ── Database dumps (jangan commit) ──
 *.sql
