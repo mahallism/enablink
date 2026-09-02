@@ -1,0 +1,15 @@
+{
+  "name": "Enablink + SLDPI Dev",
+  "repositoryDependencies": [
+    "github.com/mahallism/enablink",
+    "github.com/mahallism/sldpi"
+  ],
+  "install": "bash .cursor/install.sh",
+  "start": "bash .cursor/start.sh",
+  "terminals": [
+    {
+      "name": "laravel-dev",
+      "command": "bash .cursor/run-dev-server.sh"
+    }
+  ]
+}
