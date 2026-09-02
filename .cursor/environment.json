@@ -1,0 +1,11 @@
+{
+  "name": "Enablink Laravel Dev",
+  "install": "bash .cursor/install.sh",
+  "start": "bash .cursor/start.sh",
+  "terminals": [
+    {
+      "name": "laravel-dev",
+      "command": "bash .cursor/run-dev-server.sh"
+    }
+  ]
+}
