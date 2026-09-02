@@ -35,9 +35,7 @@ laravel/npm-debug.log
 laravel/yarn-error.log
 
 # ── CodeIgniter sensitive ──
-application/config/database.php
-application/config/config.php
-contents/config/database.php
+application/config/database.php.example
 
 # ── Database dumps (jangan commit) ──
 *.sql

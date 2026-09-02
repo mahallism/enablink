@@ -121,8 +121,6 @@ switch (ENVIRONMENT)
 		echo 'The application environment is not set correctly.';
 		exit(1); // EXIT_ERROR
 }
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
 
 /*
  *---------------------------------------------------------------
@@ -349,5 +347,4 @@ $application_folder = isset($application_folder) ? $application_folder : 'applic
  * And away we go...
  */
 require_once BASEPATH.'core/CodeIgniter.php';
-
 
