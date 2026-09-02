@@ -1390,7 +1390,9 @@ class Pendampingan extends App_Controller
             "day"=>$day,
             "start_at"=>$data['start_at'],
             "end_at"=>$data['end_at'],
-            "majors_focus"=>$data["majors_focus"],
+            "prior_majors_focus" => $data["majors_focus"],
+            "prior_majors_id" => $data["majors_id"],
+            "prior_faculty_id" => $data["faculty_id"],
             "limit_count_accompaniment"=>$max_freq_accompanisment
         ));
 		$volunteer_data = array();
